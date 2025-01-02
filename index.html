@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ઇ ˚ ݂ ֹ ꒰ dollieourgifs ꒱ ! ۟ ׅ ͡</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #fff; /* Color de fondo */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Encabezado */
+        #header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        #header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        #header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 100;
+            word-spacing: 5px;
+            position: relative;
+            width: 390px; /* Establece el ancho */
+            margin: 0 auto; /* Centra horizontalmente */
+        }
+
+        /* Contenedor de los GIFs */
+        #gifcontainer {
+            width: 1400px; /* Ancho del contenido */
+            margin: 0 auto;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .gif {
+            display: inline-block;
+            width: 267px;
+            height: 150px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>ׅ ׄ &nbsp;&nbsp;&nbsp;౿ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;yeonjun gif pack &nbsp;&nbsp;&nbsp; ׂ &nbsp;&nbsp;&nbsp; ִ &nbsp;&nbsp;&nbsp;ദㅤ!</h1>
+        <h2>hello ♡ i'm val. all of these gifs were made from scratch by me, so don't claim them as your own. i hope you have fun using them and please respect my rules.</h2>
+    </div>
+
+    <div id="gif-container"></div>
+
+    <script>
+        // URL del repositorio en GitHub
+        const repoURL = "https://api.github.com/repos/dollieourgifs/yeonjun/contents/";
+
+        // Contenedor donde se mostrarán los GIFs
+        const container = document.getElementById('gif-container');
+
+        // Obtener la lista de archivos desde el repositorio
+        fetch(repoURL)
+            .then(response => response.json())
+            .then(files => {
+                files.forEach(file => {
+                    if (file.name.endsWith('.gif')) { // Verificar que el archivo es un GIF
+                        const img = document.createElement('img');
+                        img.src = file.download_url; // Usar la URL directa del archivo
+                        img.alt = file.name; // Texto alternativo
+                        container.appendChild(img); // Agregar al contenedor
+                    }
+                });
+            })
+            .catch(error => console.error('Error al cargar los GIFs:', error));
+    </script>
+</body>
+</html>
