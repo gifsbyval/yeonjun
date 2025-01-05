@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ઇ ˚ ݂ ֹ ꒰ dollieourgifs ꒱ ! ۟ ׅ ͡</title>
+    <title>ઇ   ˚     ݂     ֹ   ꒰  dollieourgifs  ꒱   !    ۟    ׅ    ͡</title>
     <style>
         /* Estilos generales */
         body {
@@ -39,46 +39,55 @@
 
         /* Contenedor de los GIFs */
         #gifcontainer {
-            width: 1400px; /* Ancho del contenido */
-            margin: 0 auto;
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 30px;
+            width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho de la pantalla */
+            margin: 0; /* Elimina los márgenes */
+            padding: 0; /* Elimina el relleno */
+            box-sizing: border-box; /* Asegura que el relleno no afecte el ancho total */
+            text-align: justify; /* Alinea los GIFs de forma fluida */
+            line-height: 0; /* Elimina el espacio entre las filas */
         }
+
         .gif {
             display: inline-block;
-            width: 267px;
-            height: 150px;
-            margin: 10px;
+            width: calc(100% / 7); /* 7 GIFs por fila */
+            height: auto;
+            margin: 0; /* Elimina el margen entre los GIFs */
+            padding: 0; /* Elimina el padding entre los GIFs */
         }
     </style>
 </head>
 <body>
     <div id="header">
-        <h1>ׅ ׄ &nbsp;&nbsp;&nbsp;౿ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;yeonjun gif pack &nbsp;&nbsp;&nbsp; ׂ &nbsp;&nbsp;&nbsp; ִ &nbsp;&nbsp;&nbsp;ദㅤ!</h1>
+        <h1>ׅ ׄ  &nbsp;&nbsp;&nbsp;౿ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;yeonjun gif pack   &nbsp;&nbsp;&nbsp; ׂ  &nbsp;&nbsp;&nbsp;  ִ  &nbsp;&nbsp;&nbsp;ദㅤ!</h1>
         <h2>hello ♡ i'm val. all of these gifs were made from scratch by me, so don't claim them as your own. i hope you have fun using them and please respect my rules.</h2>
     </div>
 
-    <div id="gif-container"></div>
+    <div id="gifcontainer"></div>
 
     <script>
         // URL del repositorio en GitHub
         const repoURL = "https://api.github.com/repos/dollieourgifs/yeonjun/contents/";
 
         // Contenedor donde se mostrarán los GIFs
-        const container = document.getElementById('gif-container');
+        const container = document.getElementById('gifcontainer');
 
         // Obtener la lista de archivos desde el repositorio
         fetch(repoURL)
             .then(response => response.json())
             .then(files => {
-                files.forEach(file => {
-                    if (file.name.endsWith('.gif')) { // Verificar que el archivo es un GIF
-                        const img = document.createElement('img');
-                        img.src = file.download_url; // Usar la URL directa del archivo
-                        img.alt = file.name; // Texto alternativo
-                        container.appendChild(img); // Agregar al contenedor
-                    }
+                // Filtrar solo los GIFs
+                const gifs = files.filter(file => file.name.endsWith('.gif'));
+
+                // Ordenar los GIFs por nombre (de más reciente a más antiguo)
+                gifs.sort((a, b) => b.name.localeCompare(a.name));
+
+                // Mostrar los GIFs ordenados
+                gifs.forEach(file => {
+                    const img = document.createElement('img');
+                    img.src = file.download_url; // Usar la URL directa del archivo
+                    img.alt = file.name; // Texto alternativo
+                    img.classList.add('gif'); // Añadir la clase 'gif' para aplicar los estilos
+                    container.appendChild(img); // Agregar al contenedor
                 });
             })
             .catch(error => console.error('Error al cargar los GIFs:', error));
